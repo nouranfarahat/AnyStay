@@ -144,13 +144,32 @@ class CustomBottomNavBar extends StatelessWidget {
                   topRight: Radius.circular(50),
                 ),
               ),
-              child: Transform.translate(
-                offset: Offset(0, isActive ? -1 : 0), // ↑ Raise by 10px when active
-                child: Icon(
-                  isActive ? item.selectedIcon : item.unSelectedIcon,
-                  size: isActive ? 55 : 35,
-                  color: AppTheme.secondaryColor,
-                ),
+              child:
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Icon centered
+
+                  Icon(
+                    isActive ? item.selectedIcon : item.unSelectedIcon,
+                    size: isActive ? 45 : 35,
+                    color: AppTheme.secondaryColor,
+                  ),
+
+                  const Spacer(),
+                  // Label positioned at bottom with AnimatedOpacity
+                  Positioned(
+                    top: 55,
+                    child: AnimatedOpacity(
+                      opacity: isActive ? 1.0 : 0.0,
+                      duration: Duration(milliseconds: 300),
+                      child: Text(
+                        item.label,
+                        style: Theme.of(context).textTheme.bodySmall
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
         )
