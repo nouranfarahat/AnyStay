@@ -1,3 +1,4 @@
+import 'package:anystay/utilities/SharedPref.dart';
 import 'package:anystay/views/screens/main_screen.dart';
 import 'package:anystay/views/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:anystay/theme/theme.dart';
 
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefs().init(); // Initialize before runApp
   runApp(const MyApp());
 }
 
