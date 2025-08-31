@@ -27,4 +27,43 @@ class Place {
     this.isFavorite=false
   });
 
+
+  // Convert from JSON
+  factory Place.fromJson(Map<String, dynamic> json) {
+    return Place(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      category: json['category'] ?? '',
+      rating: (json['rating'] ?? 0.0).toDouble(),
+      priceTag: json['priceTag'] ?? 'Free',
+      lat: (json['lat'] ?? 0.0).toDouble(),
+      lng: (json['lng'] ?? 0.0).toDouble(),
+      coverUrl: json['coverUrl'] ?? '',
+      isFavorite: json['isFavorite'] ?? false,
+      description: json['description'] ?? '',
+      openHours: json['openHours'] ?? '',
+      tags: List<String>.from(json['tags'] as List),
+    );
+  }
+
+  // Convert to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'category': category,
+      'rating': rating,
+      'priceTag': priceTag,
+      'lat': lat,
+      'lng': lng,
+      'coverUrl': coverUrl,
+      'description': description,
+      'openHours': openHours,
+      'tags': tags,
+    };
+  }
+  void toggleFavorite() {
+    isFavorite = !isFavorite;
+  }
+
 }

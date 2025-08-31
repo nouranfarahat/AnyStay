@@ -1,9 +1,9 @@
 import 'package:anystay/models/Place.dart';
 import 'package:anystay/theme/theme.dart';
+import 'package:anystay/utilities/place_service.dart';
 import 'package:anystay/views/widgets/place_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
 
@@ -12,34 +12,20 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
-  List<Place> places = [
-    Place(
-      id: '1',
-      name: 'Beautiful Beach Resort',
-      coverUrl: 'https://picsum.photos/seed/burj/1200/800',
-      rating: 4.8,
-      priceTag: 'Paid',
-      category: 'Beach',
-      lat: 2,
-      lng: 2,
-      description: 'kk',
-      openHours: '44',
-      tags: ["ii"],
-    ),
-    Place(
-      id: '2',
-      name: 'Beautiful Beach Resort',
-      coverUrl: 'https://picsum.photos/seed/mall/1200/800',
-      rating: 4.8,
-      priceTag: 'Paid',
-      category: 'Beach',
-      lat: 2,
-      lng: 2,
-      description: 'kk',
-      openHours: '44',
-      tags: ["ii"],
-    )
-  ];
+  List<Place> places = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPlaces();
+  }
+  Future<void> _loadPlaces() async {
+    final loadedPlaces=await PlaceService.loadPlacesFromAssets();
+
+    setState(() {
+      places=loadedPlaces;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +36,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         ),
         body: Padding(
             padding: const EdgeInsets.all(16),
-            child:
-            ListView.builder(
+            child: ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: places.length,
               itemBuilder: (context, index) {
@@ -78,6 +63,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             //         onFavoritePressed: ()=>{},
             //       );
             //     })
-        ));
+            ));
   }
 }
