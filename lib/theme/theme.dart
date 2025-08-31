@@ -8,6 +8,8 @@ class AppTheme {
   static const Color surfaceColor = Color(0xFFFFFFFF); // White
   static const Color textColor = Color(0xFF212529); // Charcoal
   static const Color textSecondaryColor = Color(0xFF6C757D); // Medium Grey
+  static  Color cardShadowColor = Colors.black54.withOpacity(0.1); // Medium Grey
+
 // Text Sizes - Create a consistent scale
   static const double fontSizeDisplayLarge = 32.0;
   static const double fontSizeDisplayMedium = 28.0;

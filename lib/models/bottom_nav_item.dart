@@ -15,7 +15,7 @@ class BottomNavItem {
 }
 
 List<BottomNavItem> bottomNavItems=[
-  BottomNavItem(label: "Discover", selectedIcon: Icons.explore,unSelectedIcon:Icons.explore_outlined, route: "/home"),
+  BottomNavItem(label: "Discover", selectedIcon: Icons.explore,unSelectedIcon:Icons.explore_outlined, route: "/discover"),
   BottomNavItem(label: "Categories", selectedIcon: Icons.category,unSelectedIcon:Icons.category_outlined, route: "/categories"),
   BottomNavItem(label: "Favorite", selectedIcon: Icons.favorite,unSelectedIcon:Icons.favorite_outline, route: "/favorite"),
 

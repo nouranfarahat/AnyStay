@@ -10,6 +10,7 @@ class Place {
   String description;
   String openHours;
   List<String> tags;
+  bool isFavorite;
 
   Place({
     required this.id,
@@ -23,6 +24,7 @@ class Place {
     required this.description,
     required this.openHours,
     required this.tags,
+    this.isFavorite=false
   });
 
 }

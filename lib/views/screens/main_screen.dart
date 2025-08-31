@@ -1,11 +1,8 @@
+import 'package:anystay/views/screens/discover_screen.dart';
 import 'package:anystay/views/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:anystay/controllers/main_screen_controller.dart';
 import 'package:anystay/theme/theme.dart';
-// import 'package:anystay/widgets/custom_bottom_nav_bar.dart';
-// import 'package:anystay/views/discover_screen.dart';
-// import 'package:anystay/views/categories_screen.dart';
-// import 'package:anystay/views/favorites_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -36,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
     return IndexedStack(
       index: _controller.currentIndex,
       children: const [
-        // DiscoverScreen(),
+         DiscoverScreen(),
         // CategoriesScreen(),
         // FavoritesScreen(),
       ],
