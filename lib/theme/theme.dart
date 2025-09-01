@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFF2A8C8C); // Deep Navy Blue
-  static const Color secondaryColor = Color(0xFF2B9348); // Forest Green
+  static const Color primaryColor = Color(0xFF0B393D); // Deep Navy Blue
+  static const Color secondaryColor = Color(0xFFB7EEE9); // Forest Green
   static const Color accentColor = Color(0xFFE07A5F); // Warm Coral
   static const Color backgroundColor = Color(0xFFF8F9FA); // Off-White
   static const Color surfaceColor = Color(0xFFFFFFFF); // White
   static const Color textColor = Color(0xFF212529); // Charcoal
   static const Color textSecondaryColor = Color(0xFF6C757D); // Medium Grey
+  static  Color cardShadowColor = Colors.black54.withOpacity(0.1); // Medium Grey
+
 // Text Sizes - Create a consistent scale
   static const double fontSizeDisplayLarge = 32.0;
   static const double fontSizeDisplayMedium = 28.0;
@@ -59,8 +61,8 @@ class AppTheme {
         ),
         headlineSmall: TextStyle(
           fontSize: fontSizeHeadlineSmall,
-          fontWeight: FontWeight.w600,
-          color: textColor,
+          fontWeight: FontWeight.bold,
+          color: primaryColor,
         ),
 
         // Title - For card titles, buttons
@@ -83,7 +85,8 @@ class AppTheme {
         ),
         bodySmall: TextStyle(
           fontSize: fontSizeBodySmall,
-          color: textSecondaryColor,
+          color: secondaryColor,
+          fontWeight: FontWeight.w600
         ),
 
         // Label - For form labels, captions

@@ -1,5 +1,6 @@
 import 'package:anystay/models/onboarding_model.dart';
 import 'package:anystay/theme/theme.dart';
+import 'package:anystay/theme/shadows.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -163,12 +164,13 @@ class OnboardingPage extends StatelessWidget {
                     image: AssetImage(model.imagePath),
                   ),
                   boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      offset: const Offset(0, 10),
-                      blurRadius: 15,
-                      spreadRadius: 2,
-                    ),
+                    MyShadowStyle.onboardingShadowStyle
+                    // BoxShadow(
+                    //   color: Colors.black.withOpacity(0.5),
+                    //   offset: const Offset(0, 10),
+                    //   blurRadius: 15,
+                    //   spreadRadius: 2,
+                    // ),
                   ],
                 )))
       ],
