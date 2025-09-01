@@ -1,3 +1,4 @@
+import 'package:anystay/controllers/place_controller.dart';
 import 'package:anystay/models/Place.dart';
 import 'package:anystay/utilities/SharedPref.dart';
 import 'package:anystay/utilities/favorite_notifier.dart';
@@ -19,52 +20,34 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final MainScreenController _controller = MainScreenController();
-  final FavoriteNotifier _favoriteNotifier=FavoriteNotifier();
-  List<Place> allPlaces = [];
-  bool isLoading = true;
+  final PlaceController _placeController = PlaceController();
+
+  // final FavoriteNotifier _favoriteNotifier=FavoriteNotifier();
+  // List<Place> allPlaces = [];
+  // bool isLoading = true;
   @override
   void initState() {
     super.initState();
     _loadPlaces();
   }
+
   Future<void> _loadPlaces() async {
-    final loadedPlaces=await PlaceService.loadPlacesFromAssets();
-
-    final favoritePlaces=SharedPrefs().getFavoritePlaceIds();
-    for(var place in loadedPlaces)
-      {
-        // Set favorite status for each place
-        place.isFavorite=favoritePlaces.contains(place.id);
-      }
-
-    setState(() {
-      allPlaces=loadedPlaces;
-      isLoading=false;
-    });
+    try {
+      await _placeController.loadAllPlaces();
+      setState(() {});
+    } catch (e) {
+      print('Error loading data: $e');
+    }
   }
-  Future<void> _toggleFavorite(String placeId) async
-  {
-    final _sharedPrefs = SharedPrefs();
 
-    //store the place that has its fav button clicked
-    final place=allPlaces.firstWhere((p)=>p.id==placeId);
-    place.isFavorite = !place.isFavorite;
-
-    if(place.isFavorite)
-      {
-        await _sharedPrefs.addFavoritePlace(placeId);
-      }
-    else
-      {
-        await _sharedPrefs.removeFavoritePlace(placeId);
-      }
-    // Notify both screens about the change
-    _favoriteNotifier.notifyFavoritesChanged();
+  Future<void> _toggleFavorite(String placeId) async {
+    await _placeController.toggleFavorite(placeId);
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
+    if (_placeController.isLoading) {
       return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     return Scaffold(
@@ -83,14 +66,16 @@ class _MainScreenState extends State<MainScreen> {
   Widget _buildCurrentScreen() {
     return IndexedStack(
       index: _controller.currentIndex,
-      children:  [
-         DiscoverScreen(
-           places: allPlaces,
-           onFavoriteToggle: _toggleFavorite,
-         ),
-         CategoriesScreen(),
-         FavoritesScreen(allPlaces: allPlaces,
-           onFavoriteToggled: _toggleFavorite, favoriteNotifier: _favoriteNotifier,),
+      children: [
+        DiscoverScreen(
+          places: _placeController.allPlaces,
+          onFavoriteToggle: _toggleFavorite,
+        ),
+        CategoriesScreen(),
+        FavoritesScreen(
+          onFavoriteToggled: _toggleFavorite,
+          placeController: _placeController,
+        ),
       ],
     );
   }

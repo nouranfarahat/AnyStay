@@ -1,7 +1,9 @@
+import 'package:anystay/controllers/place_controller.dart';
 import 'package:anystay/models/Place.dart';
 import 'package:anystay/theme/theme.dart';
 import 'package:anystay/utilities/SharedPref.dart';
 import 'package:anystay/utilities/place_service.dart';
+import 'package:anystay/views/screens/details_screen.dart';
 import 'package:anystay/views/widgets/place_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,14 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
+  void _navigateToDetails(BuildContext context, Place place) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlaceDetailsScreen(place: place),
+      ),
+    );
+  }
   // List<Place> places = [];
   // final SharedPrefs _sharedPrefs=SharedPrefs();
   //bool isLoading=true;
@@ -77,6 +87,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   child: PlaceCard(
                     place: place,
                     onFavoritePressed: () => widget.onFavoriteToggle(widget.places[index].id),
+                    onCardPressed: ()=> _navigateToDetails(context, place),
                   ),
                 );
               },

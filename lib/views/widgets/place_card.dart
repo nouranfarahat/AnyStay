@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 class PlaceCard extends StatelessWidget {
   final Place place;
   final VoidCallback onFavoritePressed;
+  final VoidCallback onCardPressed;
 
   const PlaceCard(
-      {super.key, required this.place, required this.onFavoritePressed});
+      {super.key, required this.place, required this.onFavoritePressed, required this.onCardPressed});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return GestureDetector(
+        onTap: onCardPressed, // Make the entire card tappable
+     child:  Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child:SizedBox(
@@ -155,7 +158,7 @@ class PlaceCard extends StatelessWidget {
         ],
       )
       ),
-    );
+    ));
     //   Container(
     //   width: 180,
     //   padding: const EdgeInsets.all(1),

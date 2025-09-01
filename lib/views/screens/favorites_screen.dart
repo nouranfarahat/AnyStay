@@ -1,54 +1,70 @@
+import 'package:anystay/controllers/place_controller.dart';
 import 'package:anystay/models/Place.dart';
 import 'package:anystay/theme/theme.dart';
 import 'package:anystay/utilities/SharedPref.dart';
 import 'package:anystay/utilities/favorite_notifier.dart';
+import 'package:anystay/views/screens/details_screen.dart';
 import 'package:anystay/views/widgets/place_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritesScreen extends StatefulWidget {
-  final List<Place> allPlaces;
+ // final List<Place> allPlaces;
   final Function(String) onFavoriteToggled;
-  final FavoriteNotifier favoriteNotifier;
-  const FavoritesScreen({super.key, required this.allPlaces, required this.onFavoriteToggled, required this.favoriteNotifier});
+  //final FavoriteNotifier favoriteNotifier;
+  final PlaceController placeController;
+  const FavoritesScreen({super.key,
+    required this.onFavoriteToggled,
+    required this.placeController });
 
   @override
   State<FavoritesScreen> createState() => _FavoritesScreenState();
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  final SharedPrefs _preferences=SharedPrefs();
+  //final SharedPrefs _preferences=SharedPrefs();
   List<Place> favoritePlaces=[];
   @override
   void initState() {
     super.initState();
-    _loadFavoritePlaces();
+    widget.placeController.favoriteNotifier.addListener(_onFavoritesChanged);
 
     // Listen for favorite changes
-    widget.favoriteNotifier.addListener(_onFavoritesChanged);
+    widget.placeController.favoriteNotifier.addListener(_onFavoritesChanged);
   }
 
   void _onFavoritesChanged() {
-    _loadFavoritePlaces(); // Refresh when favorites change
+    setState(() {}); // Refresh when favorites change
   }
-  void _loadFavoritePlaces()
-  {
-    final favoriteIds=_preferences.getFavoritePlaceIds();
-    setState(() {
-      favoritePlaces=widget.allPlaces
-          .where((place)=>favoriteIds.contains(place.id))
-          .toList();
-    });
-  }
+  // void _loadFavoritePlaces()
+  // {
+  //   final favoriteIds=_preferences.getFavoritePlaceIds();
+  //   setState(() {
+  //     widget.placeController.getFavoritePlaces();
+  //     favoritePlaces=widget.allPlaces
+  //         .where((place)=>favoriteIds.contains(place.id))
+  //         .toList();
+  //   });
+  // }
 
-  Future<void> _toggleFavorite(String placeId) async {
-    // Update the actual place object (shared with DiscoverScreen)
-    await widget.onFavoriteToggled(placeId);
-
+  // Future<void> _toggleFavorite(String placeId) async {
+  //   // Update the actual place object (shared with DiscoverScreen)
+  //   await widget.onFavoriteToggled(placeId);
+  //
+  // }
+  void _navigateToDetails(BuildContext context, Place place) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlaceDetailsScreen(place: place),
+      ),
+    );
   }
   @override
   Widget build(BuildContext context) {
+    final favoritePlaces = widget.placeController.getFavoritePlaces();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Favorites'),
@@ -72,7 +88,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   padding: const EdgeInsets.only(bottom: 16),
                   child: PlaceCard(
                     place: place,
-                    onFavoritePressed: () => _toggleFavorite(place.id),
+                    onFavoritePressed: () => widget.onFavoriteToggled(place.id), onCardPressed: () => _navigateToDetails(context, place),
                   ),
                 );
               },
