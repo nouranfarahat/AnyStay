@@ -69,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
       children: [
         DiscoverScreen(
           places: _placeController.allPlaces,
-          onFavoriteToggle: _toggleFavorite,
+          onFavoriteToggle: _toggleFavorite, placeController: _placeController,
         ),
         CategoriesScreen(),
         FavoritesScreen(

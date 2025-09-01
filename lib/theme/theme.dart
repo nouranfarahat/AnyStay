@@ -61,8 +61,8 @@ class AppTheme {
         ),
         headlineSmall: TextStyle(
           fontSize: fontSizeHeadlineSmall,
-          fontWeight: FontWeight.w600,
-          color: textColor,
+          fontWeight: FontWeight.bold,
+          color: primaryColor,
         ),
 
         // Title - For card titles, buttons

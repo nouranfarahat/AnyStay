@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 class DiscoverScreen extends StatefulWidget {
   final List<Place> places; // Receive places from parent
   final Function(String) onFavoriteToggle; // Receive callback from parent
-  const DiscoverScreen({super.key, required this.places, required this.onFavoriteToggle});
+  final PlaceController placeController;
+
+  const DiscoverScreen({super.key, required this.places, required this.onFavoriteToggle, required this.placeController});
 
   @override
   State<DiscoverScreen> createState() => _DiscoverScreenState();
@@ -21,7 +23,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PlaceDetailsScreen(place: place),
+        builder: (context) => PlaceDetailsScreen(place: place, placeController: widget.placeController,),
       ),
     );
   }

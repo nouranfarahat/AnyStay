@@ -25,6 +25,7 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   //final SharedPrefs _preferences=SharedPrefs();
   List<Place> favoritePlaces=[];
+
   @override
   void initState() {
     super.initState();
@@ -57,7 +58,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PlaceDetailsScreen(place: place),
+        builder: (context) => PlaceDetailsScreen(place: place, placeController: widget.placeController,),
       ),
     );
   }
