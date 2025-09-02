@@ -28,19 +28,19 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final CustomSearchController _searchController = CustomSearchController();
   final TextEditingController _textEditingController = TextEditingController();
-  final FocusNode _searchFocusNode = FocusNode();
+   final FocusNode _searchFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     _searchController.initialize(widget.places);
-    _searchFocusNode.requestFocus();
+    // _searchFocusNode.requestFocus();
   }
 
   @override
   void dispose() {
     _textEditingController.dispose();
-    _searchFocusNode.dispose();
+    // _searchFocusNode.dispose();
     super.dispose();
 
   }
@@ -66,7 +66,9 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-
+  void _focusSearchField() {
+    FocusScope.of(context).requestFocus(_searchFocusNode);
+  }
   @override
   Widget build(BuildContext context) {
     final filteredPlaces = _searchController.filteredPlaces;
@@ -83,7 +85,9 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: EdgeInsets.all(16),
             child: Column(
               children: [
-                CustomSearchBar(
+              GestureDetector(
+              onTap: _focusSearchField,
+                child: CustomSearchBar(
                   controller: _textEditingController,
                   focusNode: _searchFocusNode,
                   onChanged: (value) {
@@ -93,7 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
                   },
                   onClear: _clearSearch,
-                ),
+                )),
                 const SizedBox(
                   height: 12,
                 ),
