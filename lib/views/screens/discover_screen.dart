@@ -94,20 +94,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 );
               },
             )
-            // GridView.builder(
-            //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //       crossAxisCount: 1,
-            //       crossAxisSpacing: 16,
-            //       mainAxisSpacing: 16,
-            //       childAspectRatio: 0.7,
-            //     ),
-            //     itemCount: places.length,
-            //     itemBuilder: (context, index) {
-            //       return PlaceCard(
-            //         place: places[index],
-            //         onFavoritePressed: ()=>{},
-            //       );
-            //     })
-            ));
+
+        ));
   }
 }
