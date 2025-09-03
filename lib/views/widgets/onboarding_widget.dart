@@ -1,7 +1,6 @@
 import 'package:anystay/models/onboarding_model.dart';
 import 'package:anystay/theme/theme.dart';
 import 'package:anystay/theme/shadows.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -81,73 +80,79 @@ class OnboardingPage extends StatelessWidget {
 
                           // Bottom section (takes about 1/4 of the space)
                           Positioned(
-                            top: 50,
+                              top: 50,
                               right: 0,
                               left: 0,
                               child: SizedBox(
-                              height: MediaQuery.of(context).size.height *
-                                  0.2, // Flexible height
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    //Page Indicator
-                                    _buildLineIndicator(
-                                        currentPage, totalPages, context),
+                                  height: MediaQuery.of(context).size.height *
+                                      0.2, // Flexible height
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        //Page Indicator
+                                        _buildLineIndicator(
+                                            currentPage, totalPages, context),
 
-                                    //Get started Button
-                                    currentPage == totalPages - 1
-                                        ? ElevatedButton(
-                                            onPressed: onComplete,
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  AppTheme.primaryColor,
-                                              foregroundColor: Colors.white,
-                                              minimumSize: const Size(
-                                                  double.infinity, 50),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(25),
-                                              ),
-                                            ),
-                                            child: const Text('Get Started'),
-                                          )
-                                        : Row(
-                                            children: [
-                                              // Skip Button
-                                              TextButton(
-                                                onPressed: onSkip,
-                                                child: Text(
-                                                  'Skip',
-                                                  style: TextStyle(
-                                                      color:
-                                                          AppTheme.primaryColor,
-                                                      fontSize: 16,
-                                                      decoration: TextDecoration
-                                                          .underline),
+                                        //Get started Button
+                                        currentPage == totalPages - 1
+                                            ? ElevatedButton(
+                                                onPressed: onComplete,
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      AppTheme.primaryColor,
+                                                  foregroundColor: Colors.white,
+                                                  minimumSize: const Size(
+                                                      double.infinity, 50),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            25),
+                                                  ),
                                                 ),
-                                              ),
+                                                child:
+                                                    const Text('Get Started'),
+                                              )
+                                            : Row(
+                                                children: [
+                                                  // Skip Button
+                                                  TextButton(
+                                                    onPressed: onSkip,
+                                                    child: Text(
+                                                      'Skip',
+                                                      style: TextStyle(
+                                                          color: AppTheme
+                                                              .primaryColor,
+                                                          fontSize: 16,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline),
+                                                    ),
+                                                  ),
 
-                                              const Spacer(),
+                                                  const Spacer(),
 
-                                              // Next Button
-                                              FloatingActionButton(
-                                                onPressed: () {
-                                                  pageController.nextPage(
-                                                    duration: const Duration(
-                                                        milliseconds: 300),
-                                                    curve: Curves.easeIn,
-                                                  );
-                                                },
-                                                backgroundColor:
-                                                    AppTheme.primaryColor,
-                                                foregroundColor: Colors.white,
-                                                child: const Icon(
-                                                    Icons.arrow_forward),
+                                                  // Next Button
+                                                  FloatingActionButton(
+                                                    onPressed: () {
+                                                      pageController.nextPage(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.easeIn,
+                                                      );
+                                                    },
+                                                    backgroundColor:
+                                                        AppTheme.primaryColor,
+                                                    foregroundColor:
+                                                        Colors.white,
+                                                    child: const Icon(
+                                                        Icons.arrow_forward),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                  ])))
+                                      ])))
                         ]))
               ])),
         ),

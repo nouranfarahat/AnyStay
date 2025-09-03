@@ -31,32 +31,30 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
           _buildImageWithGradient(),
           CustomBackButton(
             onPressed: () => Navigator.pop(context),
+            iconColor: AppTheme.primaryColor,
             backgroundColor: Colors.white.withOpacity(0.8),
           ),
-        //  _buildFavoriteButton(),
+          //  _buildFavoriteButton(),
 
-           // top:MediaQuery.of(context).size.height*0.6 ,
-             _buildContentContainer()
-
+          // top:MediaQuery.of(context).size.height*0.6 ,
+          _buildContentContainer()
         ],
       ),
     );
-
-
-
   }
-  Widget _buildImageWithGradient(){
 
+  Widget _buildImageWithGradient() {
     return SizedBox(
-      height: MediaQuery.of(context).size.height*0.4,
+      height: MediaQuery.of(context).size.height * 0.4,
       width: double.infinity,
       child: Stack(
         children: [
           //Place Image
+
           Image.network(
             widget.place.coverUrl,
             fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height*0.4,
+            height: MediaQuery.of(context).size.height * 0.4,
             width: double.infinity,
           ),
 
@@ -64,110 +62,123 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
+                  begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-
                   colors: [
-                AppTheme.primaryColor.withOpacity(0.8),
-                AppTheme.primaryColor.withOpacity(0.4),
-                AppTheme.primaryColor.withOpacity(0.2),
-                Colors.transparent
-              ],
-              stops: [0.0,0.3,0.6,0.8]),
-
+                    AppTheme.primaryColor.withOpacity(0.8),
+                    AppTheme.primaryColor.withOpacity(0.4),
+                    AppTheme.primaryColor.withOpacity(0.2),
+                    Colors.transparent
+                  ],
+                  stops: [
+                    0.0,
+                    0.3,
+                    0.6,
+                    0.8
+                  ]),
             ),
           ),
           // Place name
           Positioned(
-            bottom: 50,
-              left:15,
-              child: Text(widget.place.name,
-              style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: AppTheme.surfaceColor
-              ),)),
+              bottom: 50,
+              left: 15,
+              child: Text(
+                widget.place.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium
+                    ?.copyWith(color: AppTheme.surfaceColor),
+              )),
           Positioned(
               bottom: 40,
-              right:50,
-              child:Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                width: 80,
-                height: 40,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white.withOpacity(0.7)),
-                child:SingleRatingStar(rating: widget.place.rating)
-
-              ) )
+              right: 50,
+              child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  width: 80,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white.withOpacity(0.7)),
+                  child: SingleRatingStar(rating: widget.place.rating)))
         ],
       ),
     );
-
   }
-  
-  Widget _buildContentContainer(){
+
+  Widget _buildContentContainer() {
     return DraggableScrollableSheet(
         initialChildSize: 0.63,
         minChildSize: 0.63,
         maxChildSize: 0.9,
-        builder: (context,scrollController)
-    {
-      return Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: AppTheme.surfaceColor,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(30),
-            topLeft: Radius.circular(30),
-          )
-        ),
-        child: ListView(
-          controller: scrollController,
-          children: [
-            _buildDescription(),
-            _buildOpenHours(),
-            _buildTags(),
-            _buildMapButton(),
-
-          ],
-
-        ),
-      );
-    });
+        builder: (context, scrollController) {
+          return Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                color: AppTheme.surfaceColor,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                )),
+            child: ListView(
+              controller: scrollController,
+              children: [
+                _buildDescription(),
+                _buildOpenHours(),
+                _buildTags(),
+                _buildMapButton(),
+              ],
+            ),
+          );
+        });
   }
-  Widget _buildDescription(){
-    return Column(crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("Description",
-        style: Theme.of(context).textTheme.headlineSmall,),
-        const SizedBox(height: 8),
-        Text(widget.place.description,
-          style: Theme.of(context).textTheme.bodyLarge,),
-        const SizedBox(height: 20),
 
+  Widget _buildDescription() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Description",
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          widget.place.description,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        const SizedBox(height: 20),
       ],
     );
   }
-  Widget _buildOpenHours(){
-    return Column(crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("Open Hours",
-          style: Theme.of(context).textTheme.headlineSmall,),
-        const SizedBox(height: 8),
-        Text(widget.place.openHours,
-          style: Theme.of(context).textTheme.bodyLarge,),
-        const SizedBox(height: 20),
 
+  Widget _buildOpenHours() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Open Hours",
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          widget.place.openHours,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        const SizedBox(height: 20),
       ],
     );
   }
-  Widget _buildTags(){
-    return Column(crossAxisAlignment: CrossAxisAlignment.start,
+
+  Widget _buildTags() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Tags",
-          style: Theme.of(context).textTheme.headlineSmall,),
+        Text(
+          "Tags",
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
         const SizedBox(height: 12),
         Wrap(
           spacing: 10,
@@ -175,10 +186,10 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
           children: widget.place.tags.map((tag) => _buildTag(tag)).toList(),
         ),
         const SizedBox(height: 20),
-
       ],
     );
   }
+
   Widget _buildTag(String tag) {
     final tagColors = [
       const Color(0xFFB3E5FC),
@@ -201,9 +212,22 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       "Nature": Icons.nature,
       "Cultural": Icons.museum,
       "Free": Icons.money_off,
+
+      "Historical": Icons.history,
+      "Archaeological": Icons.account_balance,
+      "UNESCO": Icons.public,
+      "Architecture": Icons.apartment,
+      "Monument": Icons.account_balance_wallet,
+      "Modern": Icons.smartphone,
+      "Landmark": Icons.place,
+      "Eco-friendly": Icons.eco,
+      "Night": Icons.nights_stay,
+      "Show": Icons.theaters,
+      "Pool": Icons.pool,
+      "Hiking": Icons.terrain,
     };
 
-    final color = tagColors[tag.hashCode % tagColors.length-1];
+    final color = tagColors[tag.hashCode % tagColors.length ];
     final icon = tagIcons[tag] ?? Icons.label;
 
     return Container(
@@ -230,42 +254,51 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   }
 
   Widget _buildMapButton() {
-    return SizedBox(
-      width: double.infinity,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MapScreen(
-                place: widget.place,
-                mapController: MapController(),
+    return Align(
+        alignment: Alignment.bottomCenter,
+        child:  SizedBox(
+        width: 200,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MapScreen(
+                  place: widget.place,
+                  mapController: MapController(),
+                ),
               ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppTheme.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppTheme.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
           ),
-        ),
-        child: Row(children: [
-          Icon(Icons.location_on_sharp, color: AppTheme.surfaceColor,),
-    const SizedBox(width: 5,),
-    Text(
-          "View on Map",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.location_on_sharp,
+                color: AppTheme.surfaceColor,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                "View on Map",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
-        )],
-      ),
-    ));
+        )));
   }
-
 
   Future<void> _toggleFavorite() async {
     await widget.placeController.toggleFavorite(widget.place.id);

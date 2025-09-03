@@ -1,6 +1,8 @@
 // widgets/back_button.dart
 import 'package:flutter/material.dart';
 
+import '../../theme/theme.dart';
+
 class CustomBackButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Color backgroundColor;
@@ -10,7 +12,7 @@ class CustomBackButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.backgroundColor = Colors.white,
-    this.iconColor = Colors.black,
+    this.iconColor = AppTheme.primaryColor,
   });
 
   @override

@@ -3,15 +3,11 @@ import 'package:anystay/models/onboarding_model.dart';
 import 'package:anystay/views/widgets/onboarding_widget.dart';
 import 'package:flutter/material.dart';
 
-class OnboardingView extends StatefulWidget{
+class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
-
 
   @override
   State<OnboardingView> createState() => _OnboardingViewState();
-  
-
-
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
@@ -22,24 +18,23 @@ class _OnboardingViewState extends State<OnboardingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
-        controller: _pageController,
+          controller: _pageController,
           itemCount: onbordingData.length,
           onPageChanged: (int page) {
             setState(() => _currentPage = page);
           },
-          itemBuilder: (_,index)
-      {
-        final page = onbordingData[index];
+          itemBuilder: (_, index) {
+            final page = onbordingData[index];
 
-        return OnboardingPage(
-          model: page,
-          currentPage: _currentPage,
-          totalPages: onbordingData.length,
-          pageController: _pageController,
-          onSkip: () =>_controller.skipOnboarding(context),
-          onComplete: () => _controller.completeOnboarding(context),
-        );
-      }),
+            return OnboardingPage(
+              model: page,
+              currentPage: _currentPage,
+              totalPages: onbordingData.length,
+              pageController: _pageController,
+              onSkip: () => _controller.skipOnboarding(context),
+              onComplete: () => _controller.completeOnboarding(context),
+            );
+          }),
     );
   }
 }

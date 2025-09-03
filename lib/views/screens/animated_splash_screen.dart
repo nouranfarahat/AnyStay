@@ -53,7 +53,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/splash_background.jpg'),
+            image: AssetImage('assets/images/background.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -65,7 +65,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
               ScaleTransition(
                 scale: _logoAnimation,
                 child: Image.asset(
-                  'assets/app_logo.png',
+                  'assets/images/Logo.png',
                   width: 120,
                   height: 120,
                 ),
@@ -81,7 +81,8 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
                     end: Offset.zero,
                   ).animate(_textAnimation),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 32),
                     decoration: BoxDecoration(
                       color: AppTheme.primaryColor.withOpacity(0.8),
                       borderRadius: const BorderRadius.only(
@@ -92,7 +93,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
                       ),
                     ),
                     child: const Text(
-                      'VentureOut',
+                      'Turn maps into memories',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,

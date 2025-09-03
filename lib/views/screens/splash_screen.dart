@@ -29,7 +29,8 @@ class StaticSplashScreen extends StatelessWidget {
 
               // Text in bottom half circle shape
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                 decoration: BoxDecoration(
                   color: AppTheme.primaryColor.withOpacity(0.8),
                   borderRadius: const BorderRadius.only(

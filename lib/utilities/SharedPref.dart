@@ -16,18 +16,18 @@ class SharedPrefs {
 
 Set<String> getFavoritePlaceIds()
 {
-  return _sharedPrefs?.getStringList('favorite_places')?.toSet()??{};
+  return _sharedPrefs.getStringList('favorite_places')?.toSet()??{};
 }
 
 Future<bool> addFavoritePlace(String placeId) async{
     final favoritePlaces=getFavoritePlaceIds();
     favoritePlaces.add(placeId);
-    return await _sharedPrefs?.setStringList("favorite_places", favoritePlaces.toList())??false;
+    return await _sharedPrefs.setStringList("favorite_places", favoritePlaces.toList())??false;
 }
   Future<bool> removeFavoritePlace(String placeId) async{
     final favoritePlaces=getFavoritePlaceIds();
     favoritePlaces.remove(placeId);
-    return await _sharedPrefs?.setStringList("favorite_places", favoritePlaces.toList())??false;
+    return await _sharedPrefs.setStringList("favorite_places", favoritePlaces.toList())??false;
   }
 
   bool isPlaceFavorite(String placeId)

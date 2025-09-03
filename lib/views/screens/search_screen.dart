@@ -6,7 +6,6 @@ import 'package:anystay/views/screens/details_screen.dart';
 import 'package:anystay/views/widgets/category_filter_widget.dart';
 import 'package:anystay/views/widgets/custom_search_bar.dart';
 import 'package:anystay/views/widgets/place_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -28,7 +27,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final CustomSearchController _searchController = CustomSearchController();
   final TextEditingController _textEditingController = TextEditingController();
-   final FocusNode _searchFocusNode = FocusNode();
+  final FocusNode _searchFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -42,7 +41,6 @@ class _SearchScreenState extends State<SearchScreen> {
     _textEditingController.dispose();
     // _searchFocusNode.dispose();
     super.dispose();
-
   }
 
   void _handleCategoryChange(String? category) {
@@ -51,6 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _clearSearch() {
+    _textEditingController.clear();
     _searchController.clearSearch();
     setState(() {});
   }
@@ -66,9 +65,11 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
+
   void _focusSearchField() {
     FocusScope.of(context).requestFocus(_searchFocusNode);
   }
+
   @override
   Widget build(BuildContext context) {
     final filteredPlaces = _searchController.filteredPlaces;
@@ -85,19 +86,19 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: EdgeInsets.all(16),
             child: Column(
               children: [
-              GestureDetector(
-              onTap: _focusSearchField,
-                child: CustomSearchBar(
-                  controller: _textEditingController,
-                  focusNode: _searchFocusNode,
-                  onChanged: (value) {
-                    setState(() {
-                      _searchController.search(value);
-                      setState(() {});
-                    });
-                  },
-                  onClear: _clearSearch,
-                )),
+                GestureDetector(
+                    onTap: _focusSearchField,
+                    child: CustomSearchBar(
+                      controller: _textEditingController,
+                      focusNode: _searchFocusNode,
+                      onChanged: (value) {
+                        setState(() {
+                          _searchController.search(value);
+                          setState(() {});
+                        });
+                      },
+                      onClear: _clearSearch,
+                    )),
                 const SizedBox(
                   height: 12,
                 ),
@@ -160,28 +161,30 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
 
-          Expanded(child: filteredPlaces.isEmpty
-              ?_buildEmptyState()
-              :ListView.builder(
-            itemCount: filteredPlaces.length,
-              padding: EdgeInsets.all(16),
-              itemBuilder: (context,index){
-                final place=filteredPlaces[index];
-                return Padding(
-                    padding: EdgeInsets.only(bottom: 16),
-                  child: PlaceCard(
-                    place: place,
-                    onFavoritePressed:()=>widget.onFavoriteToggle(place.id),
-                    onCardPressed: ()=>_navigateToDetails(context, place),
-                  ),
-                );
-              }
-          )
-          )
+          Expanded(
+              child: filteredPlaces.isEmpty
+                  ? _buildEmptyState()
+                  : ListView.builder(
+                      itemCount: filteredPlaces.length,
+                      padding: EdgeInsets.all(16),
+                      itemBuilder: (context, index) {
+                        final place = filteredPlaces[index];
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 16),
+                          child: PlaceCard(
+                            place: place,
+                            onFavoritePressed: () =>
+                                widget.onFavoriteToggle(place.id),
+                            onCardPressed: () =>
+                                _navigateToDetails(context, place),
+                          ),
+                        );
+                      }))
         ],
       ),
     );
   }
+
   Widget _buildEmptyState() {
     return Center(
       child: Column(

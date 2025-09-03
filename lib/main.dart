@@ -1,8 +1,8 @@
 // main.dart - CORRECTED
 import 'package:anystay/utilities/SharedPref.dart';
+import 'package:anystay/views/screens/animated_splash_screen.dart';
 import 'package:anystay/views/screens/main_screen.dart';
 import 'package:anystay/views/screens/onboarding_screen.dart';
-import 'package:anystay/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:anystay/theme/theme.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'VentureOut',
+      title: 'Discoveri',
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
       home: const AppInitializer(),
@@ -66,7 +66,7 @@ class _AppInitializerState extends State<AppInitializer> {
   @override
   Widget build(BuildContext context) {
     if (_showSplash) {
-      return const StaticSplashScreen(); // Show splash first
+      return const AnimatedSplashScreen(); // Show splash first
     }
 
     if (_isLoading) {

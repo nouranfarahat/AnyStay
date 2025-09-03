@@ -10,6 +10,7 @@ class Place {
   String description;
   String openHours;
   List<String> tags;
+  String country;
   bool isFavorite;
 
   Place({
@@ -24,6 +25,7 @@ class Place {
     required this.description,
     required this.openHours,
     required this.tags,
+    required this.country,
     this.isFavorite=false
   });
 
@@ -42,6 +44,7 @@ class Place {
       isFavorite: json['isFavorite'] ?? false,
       description: json['description'] ?? '',
       openHours: json['openHours'] ?? '',
+      country: json['country'] ?? '',
       tags: List<String>.from(json['tags'] as List),
     );
   }
@@ -59,6 +62,7 @@ class Place {
       'coverUrl': coverUrl,
       'description': description,
       'openHours': openHours,
+      'country':country,
       'tags': tags,
     };
   }

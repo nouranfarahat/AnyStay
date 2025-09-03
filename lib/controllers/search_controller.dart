@@ -1,5 +1,4 @@
 import 'package:anystay/models/Place.dart';
-
 class CustomSearchController {
   String _searchQuery = '';
   String? _selectedCategory;
@@ -23,8 +22,9 @@ class CustomSearchController {
       //Search filter
       final matchFilter = _searchQuery.isEmpty ||
           place.name.toLowerCase().contains(_searchQuery) ||
-          place.description.toLowerCase().contains(_searchQuery);
-          //place.category.toLowerCase().contains(_searchQuery);
+          place.description.toLowerCase().contains(_searchQuery)||
+          place.tags.toString().toLowerCase().contains(_searchQuery)||
+          place.category.toLowerCase().contains(_searchQuery);
 
       //Category filter
       final matchedCategory = _selectedCategory == null ||
