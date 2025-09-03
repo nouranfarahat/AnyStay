@@ -212,7 +212,6 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       "Nature": Icons.nature,
       "Cultural": Icons.museum,
       "Free": Icons.money_off,
-
       "Historical": Icons.history,
       "Archaeological": Icons.account_balance,
       "UNESCO": Icons.public,
@@ -227,7 +226,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
       "Hiking": Icons.terrain,
     };
 
-    final color = tagColors[tag.hashCode % tagColors.length ];
+    final color = tagColors[tag.hashCode % tagColors.length];
     final icon = tagIcons[tag] ?? Icons.label;
 
     return Container(
@@ -256,48 +255,48 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
   Widget _buildMapButton() {
     return Align(
         alignment: Alignment.bottomCenter,
-        child:  SizedBox(
-        width: 200,
-        height: 50,
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MapScreen(
-                  place: widget.place,
-                  mapController: MapController(),
+        child: SizedBox(
+            width: 200,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MapScreen(
+                      place: widget.place,
+                      mapController: MapController(),
+                    ),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppTheme.primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.location_on_sharp,
-                color: AppTheme.surfaceColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.location_on_sharp,
+                    color: AppTheme.surfaceColor,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    "View on Map",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
               ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                "View on Map",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-        )));
+            )));
   }
 
   Future<void> _toggleFavorite() async {

@@ -17,9 +17,6 @@ class _MainScreenState extends State<MainScreen> {
   final MainScreenController _controller = MainScreenController();
   final PlaceController _placeController = PlaceController();
 
-  // final FavoriteNotifier _favoriteNotifier=FavoriteNotifier();
-  // List<Place> allPlaces = [];
-  // bool isLoading = true;
   @override
   void initState() {
     super.initState();

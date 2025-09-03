@@ -15,7 +15,6 @@ class DiscoverScreen extends StatefulWidget {
   final Function(String) onFavoriteToggle; // Receive callback from parent
   final PlaceController placeController;
 
-
   const DiscoverScreen(
       {super.key,
       required this.places,
@@ -29,20 +28,15 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   final Random _random = Random();
   int _currentCarouselIndex = 0;
-   late List<Place> _randomFeaturedPlaces;
+  late List<Place> _randomFeaturedPlaces;
   final carousel_slider.CarouselSliderController _carouselController =
-  carousel_slider.CarouselSliderController();
+      carousel_slider.CarouselSliderController();
 
   @override
   void initState() {
     super.initState();
-       _randomFeaturedPlaces = _getRandomFeaturedPlaces();
-  } // @override
-  // void initState() {
-  //   super.initState();
-  //   _randomFeaturedPlaces = _getRandomFeaturedPlaces();
-  // }
-  //
+    _randomFeaturedPlaces = _getRandomFeaturedPlaces();
+  }
 
   List<Place> _getRandomFeaturedPlaces() {
     if (widget.places.length <= 4) return widget.places;
@@ -50,6 +44,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     final shuffled = List<Place>.from(widget.places)..shuffle(_random);
     return shuffled.take(4).toList();
   }
+
   void _navigateToDetails(BuildContext context, Place place) {
     Navigator.push(
       context,
@@ -61,46 +56,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       ),
     );
   }
-
-  // List<Place> places = [];
-  // final SharedPrefs _sharedPrefs=SharedPrefs();
-  //bool isLoading=true;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadPlaces();
-  // }
-  // Future<void> _loadPlaces() async {
-  //   final loadedPlaces=await PlaceService.loadPlacesFromAssets();
-  //
-  //   final favoritePlaces=_sharedPrefs.getFavoritePlaceIds();
-  //   for(var place in loadedPlaces)
-  //     {
-  //       // Set favorite status for each place
-  //       place.isFavorite=favoritePlaces.contains(place.id);
-  //     }
-  //
-  //   setState(() {
-  //     places=loadedPlaces;
-  //     isLoading=false;
-  //   });
-  // }
-  // Future<void> _toggleFavorite(String placeId) async
-  // {
-  //   //store the place that has its fav button clicked
-  //   final place=places.firstWhere((p)=>p.id==placeId);
-  //   place.isFavorite = !place.isFavorite;
-  //   if(place.isFavorite)
-  //     {
-  //       await _sharedPrefs.addFavoritePlace(placeId);
-  //     }
-  //   else
-  //     {
-  //       await _sharedPrefs.removeFavoritePlace(placeId);
-  //     }
-  //   setState(() {});
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -127,82 +82,88 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           .displaySmall
                           ?.copyWith(color: AppTheme.primaryColor),
                     ),
-                    // Image(
-                    //   image: AssetImage('assets/images/Logo.png'),
-                    //   width: 30,
-                    //   height: 30,
-                    // ),
-                    Icon(Icons.waving_hand,color: Colors.amber,size: 30,)
+                    Icon(
+                      Icons.waving_hand,
+                      color: Colors.amber,
+                      size: 30,
+                    )
                   ],
                 )),
             const SizedBox(
               height: 25,
             ),
             // the carousel slider
-        if (_randomFeaturedPlaces.isNotEmpty) ...[
-            SizedBox(
-              height: 350,
-              child: CarouselSlider.builder(
-                options: CarouselOptions(
-                    height: 350,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(microseconds: 800),
-                    enlargeCenterPage: true,
-                    aspectRatio: 0.7,
-                    viewportFraction: 0.7,
-                    // each slide take 90% of the screen width
-                    enlargeFactor: 0.25,
-                    reverse: false,
-                    initialPage: 0,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _currentCarouselIndex = index;
-                      });
-                    },
-                    scrollDirection: Axis.horizontal,
-                    autoPlayCurve: Curves.linear),
-                itemCount: _randomFeaturedPlaces.length,
-                itemBuilder: (BuildContext context, int index, int realIndex) {
-                  final place = _randomFeaturedPlaces[index];
-                  final isCenter = index == _currentCarouselIndex;
-                  return CarouselPlaceCard(
-                    place: place,
-                    onFavoritePressed: () => widget.onFavoriteToggle(place.id),
-                    onTap: () => _navigateToDetails(context, place),
-                  );
-                },
+            if (_randomFeaturedPlaces.isNotEmpty) ...[
+              SizedBox(
+                height: 350,
+                child: CarouselSlider.builder(
+                  options: CarouselOptions(
+                      height: 350,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(microseconds: 800),
+                      enlargeCenterPage: true,
+                      aspectRatio: 0.7,
+                      viewportFraction: 0.7,
+                      // each slide take 90% of the screen width
+                      enlargeFactor: 0.25,
+                      reverse: false,
+                      initialPage: 0,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentCarouselIndex = index;
+                        });
+                      },
+                      scrollDirection: Axis.horizontal,
+                      autoPlayCurve: Curves.linear),
+                  itemCount: _randomFeaturedPlaces.length,
+                  itemBuilder:
+                      (BuildContext context, int index, int realIndex) {
+                    final place = _randomFeaturedPlaces[index];
+                    final isCenter = index == _currentCarouselIndex;
+                    return CarouselPlaceCard(
+                      place: place,
+                      onFavoritePressed: () =>
+                          widget.onFavoriteToggle(place.id),
+                      onTap: () => _navigateToDetails(context, place),
+                    );
+                  },
+                ),
               ),
-            ),
+              const SizedBox(
+                height: 16,
+              ),
+
+              //Slider indectator
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _randomFeaturedPlaces
+                    .asMap()
+                    .entries
+                    .map((item) => Container(
+                          height: 12,
+                          width: 12,
+                          margin: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentCarouselIndex == item.key
+                                  ? AppTheme.primaryColor
+                                  : AppTheme.secondaryColor),
+                        ))
+                    .toList(),
+              )
+            ],
             const SizedBox(
               height: 16,
             ),
-
-            //Slider indectator
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: _randomFeaturedPlaces
-                  .asMap()
-                  .entries
-                  .map((item) => Container(
-                        height: 12,
-                        width: 12,
-                        margin: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _currentCarouselIndex == item.key
-                                ? AppTheme.primaryColor
-                                : AppTheme.secondaryColor),
-                      ))
-                  .toList(),
-            )],
-            const SizedBox(height: 16,),
             Padding(
               padding: EdgeInsets.only(left: 16, right: 16),
               child: Text("All Places",
                   style: Theme.of(context).textTheme.headlineMedium),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
 
             ListView.builder(
               shrinkWrap: true,

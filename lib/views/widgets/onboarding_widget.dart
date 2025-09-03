@@ -168,15 +168,7 @@ class OnboardingPage extends StatelessWidget {
                   image: DecorationImage(
                     image: AssetImage(model.imagePath),
                   ),
-                  boxShadow: [
-                    MyShadowStyle.onboardingShadowStyle
-                    // BoxShadow(
-                    //   color: Colors.black.withOpacity(0.5),
-                    //   offset: const Offset(0, 10),
-                    //   blurRadius: 15,
-                    //   spreadRadius: 2,
-                    // ),
-                  ],
+                  boxShadow: [MyShadowStyle.onboardingShadowStyle],
                 )))
       ],
     );

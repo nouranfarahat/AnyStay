@@ -34,11 +34,12 @@ class SingleRatingStar extends StatelessWidget {
           // Rating number
           Text(
             rating.toStringAsFixed(1),
-            style: numberStyle ?? TextStyle(
-              fontSize: size * 0.5,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
+            style: numberStyle ??
+                TextStyle(
+                  fontSize: size * 0.5,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
           ),
         ],
       ],
@@ -148,12 +149,7 @@ class _StarClipper extends CustomClipper<Rect> {
   Rect getClip(Size size) {
     // Calculate fill percentage (rating from 0 to 5, convert to 0 to 1)
     final fillPercentage = (rating / 5.0).clamp(0.0, 1.0);
-    return Rect.fromLTRB(
-        0,
-        0,
-        size.width * fillPercentage,
-        size.height
-    );
+    return Rect.fromLTRB(0, 0, size.width * fillPercentage, size.height);
   }
 
   @override

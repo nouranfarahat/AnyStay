@@ -14,6 +14,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   final OnboardingController _controller = OnboardingController();
   final PageController _pageController = PageController();
   int _currentPage = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

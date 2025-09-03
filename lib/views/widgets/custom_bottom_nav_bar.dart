@@ -17,12 +17,6 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-// final screenWidth = MediaQuery.of(context).size.width;
-
-// final itemWidth = screenWidth / bottomNavItems.length;
-
-// final bubblePosition = (itemWidth * currentIndex) + (itemWidth / 2) - 30;
-
     return Container(
       height: 100,
       color: Colors.transparent,
@@ -36,41 +30,6 @@ class CustomBottomNavBar extends StatelessWidget {
                 height: 75,
                 color: AppTheme.primaryColor,
               )),
-
-// AnimatedPositioned(
-
-// duration: Duration(microseconds: 300),
-
-// curve: Curves.easeIn,
-
-// bottom: 60,
-
-// left: bubblePosition,
-
-// child: Container(
-
-// width: 60,
-
-// height: 30,
-
-// decoration: BoxDecoration(
-
-// color: AppTheme.primaryColor,
-
-// borderRadius: const BorderRadius.only(
-
-// topLeft: Radius.circular(30),
-
-// topRight: Radius.circular(30),
-
-// ),
-
-// ),
-
-//
-
-// ),),
-
           Positioned(
               bottom: 10,
               right: 0,

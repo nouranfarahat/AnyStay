@@ -95,23 +95,18 @@ class CarouselPlaceCard extends StatelessWidget {
                             size: 30,
                           ),
                         ),
-                        // child: Icon(
-                        //   place.isFavorite?
-                        //   Icons.favorite:Icons.favorite_outline,
-                        //   color: place.isFavorite?Colors.red:Colors.black54,
-                        //   size: 30,),
                       )),
                   //Pricetag notch
                   Positioned(
                       bottom: 0,
                       right: 0,
-                      child: DiagonalNotch(text: place.priceTag, color: place.priceTag=="Paid"
-                          ?AppTheme.primaryColor
-                      :AppTheme.secondaryColor))
+                      child: DiagonalNotch(
+                          text: place.priceTag,
+                          color: place.priceTag == "Paid"
+                              ? AppTheme.primaryColor
+                              : AppTheme.secondaryColor))
                 ],
               )),
         ));
-    // Custom painter for the larger diagonal notch
   }
 }
-

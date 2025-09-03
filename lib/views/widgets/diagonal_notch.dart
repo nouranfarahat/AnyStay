@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
-
 class DiagonalNotch extends StatelessWidget {
   final String text;
   final Color color;
   final double width;
   final double height;
   final TextStyle? textStyle;
-  const DiagonalNotch({
-    super.key,
-    required this.text,
-    required this.color,
-    this.width=12,
-    this.height=60,
-    this.textStyle});
+
+  const DiagonalNotch(
+      {super.key,
+      required this.text,
+      required this.color,
+      this.width = 12,
+      this.height = 60,
+      this.textStyle});
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       size: Size(120, 60),
-      painter: _DiagonalNotchPainter( color: color),
+      painter: _DiagonalNotchPainter(color: color),
       child: Container(
-
         padding: EdgeInsets.only(left: 0, bottom: 17),
         alignment: Alignment.bottomLeft,
         child: Transform.rotate(
@@ -42,12 +41,11 @@ class DiagonalNotch extends StatelessWidget {
             ),
           ),
         ),
-
       ),
     );
   }
-
 }
+
 class _DiagonalNotchPainter extends CustomPainter {
   final Color color;
 
@@ -65,13 +63,6 @@ class _DiagonalNotchPainter extends CustomPainter {
       ..close();
 
     canvas.drawPath(path, paint);
-
-    // final borderPaint = Paint()
-    //   ..color = AppTheme.primaryColor!
-    //   ..style = PaintingStyle.stroke
-    //   ..strokeWidth = 1.5;
-    //
-    // canvas.drawPath(path, borderPaint);
   }
 
   @override
@@ -82,4 +73,3 @@ class _DiagonalNotchPainter extends CustomPainter {
     return true;
   }
 }
-
