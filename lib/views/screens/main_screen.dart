@@ -1,15 +1,10 @@
 import 'package:anystay/controllers/place_controller.dart';
-import 'package:anystay/models/Place.dart';
-import 'package:anystay/utilities/SharedPref.dart';
-import 'package:anystay/utilities/favorite_notifier.dart';
-import 'package:anystay/utilities/place_service.dart';
-import 'package:anystay/views/screens/categories_screen.dart';
 import 'package:anystay/views/screens/discover_screen.dart';
 import 'package:anystay/views/screens/favorites_screen.dart';
+import 'package:anystay/views/screens/search_screen.dart';
 import 'package:anystay/views/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:anystay/controllers/main_screen_controller.dart';
-import 'package:anystay/theme/theme.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,9 +17,6 @@ class _MainScreenState extends State<MainScreen> {
   final MainScreenController _controller = MainScreenController();
   final PlaceController _placeController = PlaceController();
 
-  // final FavoriteNotifier _favoriteNotifier=FavoriteNotifier();
-  // List<Place> allPlaces = [];
-  // bool isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -69,9 +61,14 @@ class _MainScreenState extends State<MainScreen> {
       children: [
         DiscoverScreen(
           places: _placeController.allPlaces,
-          onFavoriteToggle: _toggleFavorite, placeController: _placeController,
+          onFavoriteToggle: _toggleFavorite,
+          placeController: _placeController,
         ),
-        CategoriesScreen(),
+        SearchScreen(
+          places: _placeController.allPlaces,
+          onFavoriteToggle: _toggleFavorite,
+          placeController: _placeController,
+        ),
         FavoritesScreen(
           onFavoriteToggled: _toggleFavorite,
           placeController: _placeController,

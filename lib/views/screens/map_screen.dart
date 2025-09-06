@@ -41,7 +41,7 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           GoogleMap(
             initialCameraPosition:
-            widget.mapController.getInitialCameraPosition(widget.place),
+                widget.mapController.getInitialCameraPosition(widget.place),
             markers: widget.mapController.getMarkers(widget.place),
             onMapCreated: widget.mapController.onMapCreated,
           ),
